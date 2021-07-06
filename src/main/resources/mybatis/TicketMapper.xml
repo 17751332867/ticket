@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lut.ticket.dao.TicketMapper">
+<resultMap id="BaseResultMap" type="com.lut.ticket.entity.Ticket">
+            <result column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="price" property="price" />
+        <result column="punctualityRate" property="punctualityRate" />
+        <result column="flightId" property="flightId" />
+        <result column="total" property="total" />
+        <result column="remain" property="remain" />
+</resultMap>  
+
+    <!-- ??? -->
+    <sql id="baseColumns">
+         t.id
+        , t.type
+        , t.price
+        , t.punctualityRate
+        , t.flightId
+        , t.total
+        , t.remain
+        </sql>
+    <select id="findTicketByFlightId" resultMap="BaseResultMap" parameterType="Integer">
+        SELECT
+        <include refid="baseColumns"/>
+        from ticket t where flightId=#{id}
+    </select>
+    <!-- ???? -->
+    <select id="listAll" resultMap="BaseResultMap">
+SELECT         
+        <include refid="baseColumns" />
+FROM ticket t
+</select>
+ 
+ <!-- ?????????? -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+SELECT         
+        <include refid="baseColumns" />
+FROM ticket t
+WHERE id = #{id}
+</select>
+
+<!-- ?????? -->
+    <insert id="insert" parameterType="com.lut.ticket.entity.Ticket"
+keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+INSERT INTO ticket
+    <trim prefix="(" suffix=")" suffixOverrides=","> 
+                    type,
+                price,
+                punctualityRate,
+                flightId,
+                total,
+                remain,
+            </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                        #{type},                   
+                    #{price},                   
+                    #{punctualityRate},                   
+                    #{flightId},                   
+                    #{total},                   
+                    #{remain},                   
+            </trim>
+</insert>
+    
+    <!-- ????NULL??? -->
+    <insert id="insertIgnoreNull" parameterType="com.lut.ticket.entity.Ticket"
+        keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+        >
+        INSERT INTO ticket    
+        <trim prefix="(" suffix=")" suffixOverrides=","> 
+
+                                                                            <if test="type != null">
+                   type,
+                    </if>
+                                                                <if test="price != null">
+                   price,
+                    </if>
+                                                                <if test="punctualityRate != null">
+                   punctualityRate,
+                    </if>
+                                                                <if test="flightId != null">
+                   flightId,
+                    </if>
+                                                                <if test="total != null">
+                   total,
+                    </if>
+                                                                <if test="remain != null">
+                   remain,
+                    </if>
+                                    </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                                                                            <if test="type != null" >
+                    #{type},                    
+                    </if>
+                                                                <if test="price != null" >
+                    #{price},                    
+                    </if>
+                                                                <if test="punctualityRate != null" >
+                    #{punctualityRate},                    
+                    </if>
+                                                                <if test="flightId != null" >
+                    #{flightId},                    
+                    </if>
+                                                                <if test="total != null" >
+                    #{total},                    
+                    </if>
+                                                                <if test="remain != null" >
+                    #{remain},                    
+                    </if>
+                                    </trim>
+    </insert>
+
+<!-- ??,?????? -->
+    <update id="update" parameterType="com.lut.ticket.entity.Ticket">
+    UPDATE ticket
+     <set>
+                                     type=#{type},        
+                                price=#{price},        
+                                punctualityRate=#{punctualityRate},        
+                                flightId=#{flightId},        
+                                total=#{total},        
+                                remain=#{remain},        
+                   </set>
+    WHERE id = #{id}
+    </update>  
+    
+    
+    <!-- ????NULL??? -->
+    <update id="updateIgnoreNull" parameterType="com.lut.ticket.entity.Ticket">
+    UPDATE ticket
+    <set>
+                                                    <if test="type != null" >
+                type=#{type},                 
+                </if>
+                                                <if test="price != null" >
+                price=#{price},                 
+                </if>
+                                                <if test="punctualityRate != null" >
+                punctualityRate=#{punctualityRate},                 
+                </if>
+                                                <if test="flightId != null" >
+                flightId=#{flightId},                 
+                </if>
+                                                <if test="total != null" >
+                total=#{total},                 
+                </if>
+                                                <if test="remain != null" >
+                remain=#{remain},                 
+                </if>
+                        </set>
+    WHERE id = #{id}
+    </update>
+
+
+<!-- ???????? -->
+<delete id="delete" parameterType="com.lut.ticket.entity.Ticket">
+UPDATE ticket
+SET is_deleted=1
+WHERE id = #{id}
+</delete>
+
+
+</mapper>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lut.ticket.dao.CrawlerMapper">
+<resultMap id="BaseResultMap" type="com.lut.ticket.entity.Crawler">
+            <result column="id" property="id" />
+        <result column="airline" property="airline" />
+        <result column="flightNumber" property="flightNumber" />
+        <result column="departureDate" property="departureDate" />
+        <result column="arrivalDate" property="arrivalDate" />
+        <result column="economyClass" property="economyClass" />
+        <result column="businessClass" property="businessClass" />
+        <result column="firstClass" property="firstClass" />
+        <result column="punctualityRate" property="punctualityRate" />
+        <result column="dcity" property="dcity" />
+        <result column="acity" property="acity" />
+        <result column="date" property="date" />
+</resultMap>  
+    
+    <!-- ??? -->
+    <sql id="baseColumns">
+         t.id
+        , t.airline
+        , t.flightNumber
+        , t.departureDate
+        , t.arrivalDate
+        , t.economyClass
+        , t.businessClass
+        , t.firstClass
+        , t.punctualityRate
+        , t.dcity
+        , t.acity
+        , t.date
+        </sql> 
+    
+    <!-- ???? -->
+    <select id="listAll" resultMap="BaseResultMap">
+SELECT         
+        <include refid="baseColumns" />
+FROM crawler t
+</select>
+ 
+ <!-- ?????????? -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+SELECT         
+        <include refid="baseColumns" />
+FROM crawler t
+WHERE id = #{id}
+</select>
+
+<!-- ?????? -->
+    <insert id="insert" parameterType="com.lut.ticket.entity.Crawler"
+keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+INSERT INTO crawler
+    <trim prefix="(" suffix=")" suffixOverrides=","> 
+                    airline,
+                flightNumber,
+                departureDate,
+                arrivalDate,
+                economyClass,
+                businessClass,
+                firstClass,
+                punctualityRate,
+                dcity,
+                acity,
+                date,
+            </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                        #{airline},                   
+                    #{flightNumber},                   
+                    #{departureDate},                   
+                    #{arrivalDate},                   
+                    #{economyClass},                   
+                    #{businessClass},                   
+                    #{firstClass},                   
+                    #{punctualityRate},                   
+                    #{dcity},                   
+                    #{acity},                   
+                    #{date},                   
+            </trim>
+</insert>
+    
+    <!-- ????NULL??? -->
+    <insert id="insertIgnoreNull" parameterType="com.lut.ticket.entity.Crawler"
+        keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+        >
+        INSERT INTO crawler    
+        <trim prefix="(" suffix=")" suffixOverrides=","> 
+
+                                                                            <if test="airline != null">
+                   airline,
+                    </if>
+                                                                <if test="flightNumber != null">
+                   flightNumber,
+                    </if>
+                                                                <if test="departureDate != null">
+                   departureDate,
+                    </if>
+                                                                <if test="arrivalDate != null">
+                   arrivalDate,
+                    </if>
+                                                                <if test="economyClass != null">
+                   economyClass,
+                    </if>
+                                                                <if test="businessClass != null">
+                   businessClass,
+                    </if>
+                                                                <if test="firstClass != null">
+                   firstClass,
+                    </if>
+                                                                <if test="punctualityRate != null">
+                   punctualityRate,
+                    </if>
+                                                                <if test="dcity != null">
+                   dcity,
+                    </if>
+                                                                <if test="acity != null">
+                   acity,
+                    </if>
+                                                                <if test="date != null">
+                   date,
+                    </if>
+                                    </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                                                                            <if test="airline != null" >
+                    #{airline},                    
+                    </if>
+                                                                <if test="flightNumber != null" >
+                    #{flightNumber},                    
+                    </if>
+                                                                <if test="departureDate != null" >
+                    #{departureDate},                    
+                    </if>
+                                                                <if test="arrivalDate != null" >
+                    #{arrivalDate},                    
+                    </if>
+                                                                <if test="economyClass != null" >
+                    #{economyClass},                    
+                    </if>
+                                                                <if test="businessClass != null" >
+                    #{businessClass},                    
+                    </if>
+                                                                <if test="firstClass != null" >
+                    #{firstClass},                    
+                    </if>
+                                                                <if test="punctualityRate != null" >
+                    #{punctualityRate},                    
+                    </if>
+                                                                <if test="dcity != null" >
+                    #{dcity},                    
+                    </if>
+                                                                <if test="acity != null" >
+                    #{acity},                    
+                    </if>
+                                                                <if test="date != null" >
+                    #{date},                    
+                    </if>
+                                    </trim>
+    </insert>
+
+<!-- ??,?????? -->
+    <update id="update" parameterType="com.lut.ticket.entity.Crawler">
+    UPDATE crawler
+     <set>
+                                     airline=#{airline},        
+                                flightNumber=#{flightNumber},        
+                                departureDate=#{departureDate},        
+                                arrivalDate=#{arrivalDate},        
+                                economyClass=#{economyClass},        
+                                businessClass=#{businessClass},        
+                                firstClass=#{firstClass},        
+                                punctualityRate=#{punctualityRate},        
+                                dcity=#{dcity},        
+                                acity=#{acity},        
+                                date=#{date},        
+                   </set>
+    WHERE id = #{id}
+    </update>  
+    
+    
+    <!-- ????NULL??? -->
+    <update id="updateIgnoreNull" parameterType="com.lut.ticket.entity.Crawler">
+    UPDATE crawler
+    <set>
+                                                    <if test="airline != null" >
+                airline=#{airline},                 
+                </if>
+                                                <if test="flightNumber != null" >
+                flightNumber=#{flightNumber},                 
+                </if>
+                                                <if test="departureDate != null" >
+                departureDate=#{departureDate},                 
+                </if>
+                                                <if test="arrivalDate != null" >
+                arrivalDate=#{arrivalDate},                 
+                </if>
+                                                <if test="economyClass != null" >
+                economyClass=#{economyClass},                 
+                </if>
+                                                <if test="businessClass != null" >
+                businessClass=#{businessClass},                 
+                </if>
+                                                <if test="firstClass != null" >
+                firstClass=#{firstClass},                 
+                </if>
+                                                <if test="punctualityRate != null" >
+                punctualityRate=#{punctualityRate},                 
+                </if>
+                                                <if test="dcity != null" >
+                dcity=#{dcity},                 
+                </if>
+                                                <if test="acity != null" >
+                acity=#{acity},                 
+                </if>
+                                                <if test="date != null" >
+                date=#{date},                 
+                </if>
+                        </set>
+    WHERE id = #{id}
+    </update>
+
+
+<!-- ???????? -->
+<delete id="delete" parameterType="com.lut.ticket.entity.Crawler">
+UPDATE crawler
+SET is_deleted=1
+WHERE id = #{id}
+</delete>
+
+
+</mapper>

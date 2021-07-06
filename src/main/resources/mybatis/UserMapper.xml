@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lut.ticket.dao.UserMapper">
+<resultMap id="BaseResultMap" type="com.lut.ticket.entity.User">
+            <result column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="phone" property="phone" />
+        <result column="qq" property="qq" />
+        <result column="state" property="state" />
+        <result column="address" property="address" />
+</resultMap>  
+    
+    <!-- ??? -->
+    <sql id="baseColumns">
+         t.id
+        , t.username
+        , t.password
+        , t.phone
+        , t.qq
+        , t.state
+        , t.address
+        </sql> 
+    
+    <!-- ???? -->
+    <select id="listAll" resultMap="BaseResultMap">
+SELECT         
+        <include refid="baseColumns" />
+FROM user t
+</select>
+ 
+ <!-- ?????????? -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+SELECT         
+        <include refid="baseColumns" />
+FROM user t
+WHERE id = #{id}
+</select>
+
+<!-- ?????? -->
+    <insert id="insert" parameterType="com.lut.ticket.entity.User"
+keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+INSERT INTO user
+    <trim prefix="(" suffix=")" suffixOverrides=","> 
+            id,
+                username,
+                password,
+                phone,
+                qq,
+                state,
+                address,
+            </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                #{id},                   
+                    #{username},                   
+                    #{password},                   
+                    #{phone},                   
+                    #{qq},                   
+                    #{state},                   
+                    #{address},                   
+            </trim>
+</insert>
+    
+    <!-- ????NULL??? -->
+    <insert id="insertIgnoreNull" parameterType="com.lut.ticket.entity.User"
+        keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+        >
+        INSERT INTO user    
+        <trim prefix="(" suffix=")" suffixOverrides=","> 
+
+                                                <if test="id != null">
+                   id,
+                    </if>
+                                                                <if test="username != null">
+                   username,
+                    </if>
+                                                                <if test="password != null">
+                   password,
+                    </if>
+                                                                <if test="phone != null">
+                   phone,
+                    </if>
+                                                                <if test="qq != null">
+                   qq,
+                    </if>
+                                                                <if test="state != null">
+                   state,
+                    </if>
+                                                                <if test="address != null">
+                   address,
+                    </if>
+                                    </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+                                                <if test="id != null" >
+                    #{id},                    
+                    </if>
+                                                                <if test="username != null" >
+                    #{username},                    
+                    </if>
+                                                                <if test="password != null" >
+                    #{password},                    
+                    </if>
+                                                                <if test="phone != null" >
+                    #{phone},                    
+                    </if>
+                                                                <if test="qq != null" >
+                    #{qq},                    
+                    </if>
+                                                                <if test="state != null" >
+                    #{state},                    
+                    </if>
+                                                                <if test="address != null" >
+                    #{address},                    
+                    </if>
+                                    </trim>
+    </insert>
+
+<!-- ??,?????? -->
+    <update id="update" parameterType="com.lut.ticket.entity.User">
+    UPDATE user
+     <set>
+                                     username=#{username},        
+                                password=#{password},        
+                                phone=#{phone},        
+                                qq=#{qq},        
+                                state=#{state},        
+                                address=#{address},        
+                   </set>
+    WHERE id = #{id}
+    </update>  
+    
+    
+    <!-- ????NULL??? -->
+    <update id="updateIgnoreNull" parameterType="com.lut.ticket.entity.User">
+    UPDATE user
+    <set>
+                                                    <if test="username != null" >
+                username=#{username},                 
+                </if>
+                                                <if test="password != null" >
+                password=#{password},                 
+                </if>
+                                                <if test="phone != null" >
+                phone=#{phone},                 
+                </if>
+                                                <if test="qq != null" >
+                qq=#{qq},                 
+                </if>
+                                                <if test="state != null" >
+                state=#{state},                 
+                </if>
+                                                <if test="address != null" >
+                address=#{address},                 
+                </if>
+                        </set>
+    WHERE id = #{id}
+    </update>
+
+
+<!-- ???????? -->
+<delete id="delete" parameterType="com.lut.ticket.entity.User">
+UPDATE user
+SET is_deleted=1
+WHERE id = #{id}
+</delete>
+
+
+</mapper>

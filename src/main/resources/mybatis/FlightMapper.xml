@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lut.ticket.dao.FlightMapper">
+<resultMap id="BaseResultMap" type="com.lut.ticket.entity.Flight">
+            <result column="id" property="id" />
+        <result column="airline" property="airline" />
+        <result column="flightNumber" property="flightNumber" />
+        <result column="departureDate" property="departureDate" />
+        <result column="arrivalDate" property="arrivalDate" />
+        <result column="dicty" property="dicty" />
+        <result column="acity" property="acity" />
+        <result column="date" property="date" />
+        <collection fetchType="eager" property="ticketList" column="id" javaType="List" select="com.lut.ticket.dao.TicketMapper.findTicketByFlightId"></collection>
+</resultMap>
+
+    <!-- ??? -->
+    <sql id="baseColumns">
+         t.id
+        , t.airline
+        , t.flightNumber
+        , t.departureDate
+        , t.arrivalDate
+        , t.dicty
+        , t.acity
+        , t.date
+        </sql> 
+    
+    <!-- ???? -->
+    <select id="listAll" resultMap="BaseResultMap">
+SELECT         
+        <include refid="baseColumns" />
+FROM flight t
+</select>
+ <select id="getLastIndex" resultType="Integer">
+     select max(id) from flight
+ </select>
+ <!-- ?????????? -->
+    <select id="getById" resultMap="BaseResultMap" parameterType="Integer">
+SELECT         
+        <include refid="baseColumns" />
+FROM flight t
+WHERE id = #{id}
+</select>
+<select id="getFlightByJudge" resultMap="BaseResultMap" parameterType="com.lut.ticket.entity.Flight">
+    select
+    <include refid="baseColumns" />
+    from flight t where 1=1
+    <if test="dicty != null">
+        and dicty=#{dicty}
+    </if>
+    <if test="acity != null">
+        and acity=#{acity}
+    </if>
+    <if test="date != null">
+        and date=#{date}
+    </if>
+</select>
+<select id="getFlightByAllCondition" resultMap="BaseResultMap" parameterType="com.lut.ticket.entity.Flight">
+    select
+    <include refid="baseColumns" />
+     from flight t where 1=1
+    <if test="airline != null">
+     and airline=#{airline}
+    </if>
+    <if test="flightNumber != null">
+     and flightNumber=#{flightNumber}
+    </if>
+    <if test="departureDate != null">
+     and departureDate=#{departureDate}
+    </if>
+    <if test="arrivalDate != null">
+     and arrivalDate=#{arrivalDate}
+    </if>
+    <if test="dicty != null">
+     and dicty=#{dicty}
+    </if>
+    <if test="acity != null">
+     and acity=#{acity}
+    </if>
+    <if test="date != null">
+     and date=#{date}
+    </if>
+</select>
+<!-- ?????? -->
+    <insert id="insert" parameterType="com.lut.ticket.entity.Flight"
+keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+    >
+INSERT INTO flight
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+                airline,
+                flightNumber,
+                departureDate,
+                arrivalDate,
+                dicty,
+                acity,
+                date,
+            </trim>
+    <trim prefix="VALUES (" suffix=")" suffixOverrides=",">
+                    #{airline},                   
+                    #{flightNumber},                   
+                    #{departureDate},                   
+                    #{arrivalDate},                   
+                    #{dicty},                   
+                    #{acity},                   
+                    #{date},                   
+            </trim>
+</insert>
+    
+    <!-- ????NULL??? -->
+    <insert id="insertIgnoreNull" parameterType="com.lut.ticket.entity.Flight"
+        keyProperty="id" keyColumn="id" useGeneratedKeys="true"
+        >
+        INSERT INTO flight    
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                                                                <if test="airline != null">
+                   airline,
+                    </if>
+                                                                <if test="flightNumber != null">
+                   flightNumber,
+                    </if>
+                                                                <if test="departureDate != null">
+                   departureDate,
+                    </if>
+                                                                <if test="arrivalDate != null">
+                   arrivalDate,
+                    </if>
+                                                                <if test="dicty != null">
+                   dicty,
+                    </if>
+                                                                <if test="acity != null">
+                   acity,
+                    </if>
+                                                                <if test="date != null">
+                   date,
+                    </if>
+                                    </trim>
+        <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
+
+                                                                <if test="airline != null" >
+                    #{airline},                    
+                    </if>
+                                                                <if test="flightNumber != null" >
+                    #{flightNumber},                    
+                    </if>
+                                                                <if test="departureDate != null" >
+                    #{departureDate},                    
+                    </if>
+                                                                <if test="arrivalDate != null" >
+                    #{arrivalDate},                    
+                    </if>
+                                                                <if test="dicty != null" >
+                    #{dicty},                    
+                    </if>
+                                                                <if test="acity != null" >
+                    #{acity},                    
+                    </if>
+                                                                <if test="date != null" >
+                    #{date},                    
+                    </if>
+                                    </trim>
+    </insert>
+
+<!-- ??,?????? -->
+    <update id="update" parameterType="com.lut.ticket.entity.Flight">
+    UPDATE flight
+     <set>
+                                     airline=#{airline},        
+                                flightNumber=#{flightNumber},        
+                                departureDate=#{departureDate},        
+                                arrivalDate=#{arrivalDate},        
+                                dicty=#{dicty},        
+                                acity=#{acity},        
+                                date=#{date},        
+                   </set>
+    WHERE id = #{id}
+    </update>  
+    
+    
+    <!-- ????NULL??? -->
+    <update id="updateIgnoreNull" parameterType="com.lut.ticket.entity.Flight">
+    UPDATE flight
+    <set>
+                                                    <if test="airline != null" >
+                airline=#{airline},                 
+                </if>
+                                                <if test="flightNumber != null" >
+                flightNumber=#{flightNumber},                 
+                </if>
+                                                <if test="departureDate != null" >
+                departureDate=#{departureDate},                 
+                </if>
+                                                <if test="arrivalDate != null" >
+                arrivalDate=#{arrivalDate},                 
+                </if>
+                                                <if test="dicty != null" >
+                dicty=#{dicty},                 
+                </if>
+                                                <if test="acity != null" >
+                acity=#{acity},                 
+                </if>
+                                                <if test="date != null" >
+                date=#{date},                 
+                </if>
+                        </set>
+    WHERE id = #{id}
+    </update>
+
+
+<!-- ???????? -->
+<delete id="delete" parameterType="com.lut.ticket.entity.Flight">
+UPDATE flight
+SET is_deleted=1
+WHERE id = #{id}
+</delete>
+
+
+</mapper>

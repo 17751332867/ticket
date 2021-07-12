@@ -9,9 +9,11 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class Order {
-private Integer id;
+private String id;
 private String passenger;
 private Integer flightId;
 private Integer ticketId;
 private String state;
+private Integer price;
+private String name;
 }

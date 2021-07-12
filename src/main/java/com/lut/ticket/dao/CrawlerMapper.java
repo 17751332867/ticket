@@ -18,6 +18,7 @@ public interface CrawlerMapper {
 List<Crawler> listAll();
 
 
+
 /**
      * ??????
      *
@@ -66,5 +67,5 @@ int updateIgnoreNull(Crawler crawler);
      */
 int delete(Crawler crawler);
 
-
+int deleteAll();
 }

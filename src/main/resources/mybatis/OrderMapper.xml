@@ -7,6 +7,8 @@
         <result column="flightId" property="flightId" />
         <result column="ticketId" property="ticketId" />
         <result column="state" property="state" />
+        <result column="price" property="price" />
+        <result column="name" property="name" />
 </resultMap>  
     
     <!-- ??? -->
@@ -16,6 +18,8 @@
         , t.flightId
         , t.ticketId
         , t.state
+        , t.price
+        , t.name
         </sql> 
     
     <!-- ???? -->
@@ -43,12 +47,16 @@ INSERT INTO order
                 flightId,
                 ticketId,
                 state,
+                price,
+                name,
             </trim>
     <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
                         #{passenger},                   
                     #{flightId},                   
                     #{ticketId},                   
                     #{state},                   
+                    #{price},                   
+                    #{name},                   
             </trim>
 </insert>
     
@@ -71,6 +79,12 @@ INSERT INTO order
                                                                 <if test="state != null">
                    state,
                     </if>
+                                                                <if test="price != null">
+                   price,
+                    </if>
+                                                                <if test="name != null">
+                   name,
+                    </if>
                                     </trim>
         <trim prefix="VALUES (" suffix=")" suffixOverrides=",">            
                                                                             <if test="passenger != null" >
@@ -85,6 +99,12 @@ INSERT INTO order
                                                                 <if test="state != null" >
                     #{state},                    
                     </if>
+                                                                <if test="price != null" >
+                    #{price},                    
+                    </if>
+                                                                <if test="name != null" >
+                    #{name},                    
+                    </if>
                                     </trim>
     </insert>
 
@@ -96,6 +116,8 @@ INSERT INTO order
                                 flightId=#{flightId},        
                                 ticketId=#{ticketId},        
                                 state=#{state},        
+                                price=#{price},        
+                                name=#{name},        
                    </set>
     WHERE id = #{id}
     </update>  
@@ -116,6 +138,12 @@ INSERT INTO order
                 </if>
                                                 <if test="state != null" >
                 state=#{state},                 
+                </if>
+                                                <if test="price != null" >
+                price=#{price},                 
+                </if>
+                                                <if test="name != null" >
+                name=#{name},                 
                 </if>
                         </set>
     WHERE id = #{id}

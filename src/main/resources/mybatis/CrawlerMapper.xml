@@ -227,5 +227,8 @@ SET is_deleted=1
 WHERE id = #{id}
 </delete>
 
+    <delete id="deleteAll">
+        delete from crawler
+    </delete>
 
 </mapper>

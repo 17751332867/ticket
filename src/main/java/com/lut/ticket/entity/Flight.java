@@ -18,11 +18,13 @@ public class Flight {
 private Integer id;
 private String airline;
 private String flightNumber;
+@JsonFormat(pattern = "HH:mm")
 private Date departureDate;
+@JsonFormat(pattern = "HH:mm")
 private Date arrivalDate;
 private String dicty;
 private String acity;
 private String date;
 private List<Ticket> ticketList;
-
+private boolean opened;
 }

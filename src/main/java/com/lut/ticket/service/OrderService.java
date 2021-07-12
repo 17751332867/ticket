@@ -1,7 +1,9 @@
 package com.lut.ticket.service;
 
+import com.lut.ticket.dao.TicketMapper;
 import com.lut.ticket.entity.Order;
 import com.lut.ticket.dao.OrderMapper;
+import com.lut.ticket.entity.Ticket;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import java.util.List;
 @Service
 public class OrderService {
 
+    @Autowired
+    private TicketMapper ticketMapper;
     @Autowired
     private OrderMapper orderMapper;
 
@@ -83,4 +87,16 @@ public class OrderService {
     return orderMapper.delete(order);
     }
 
+    public void HandleOrder(String ticketId, String passenger, String subject, String total_amount,String id) {
+        Order order = new Order();
+        Ticket ticket = ticketMapper.getById(Integer.valueOf(ticketId));
+        order.setFlightId(ticket.getFlightId()).
+                setPassenger(passenger).
+                setName(subject).
+                setPrice(Integer.valueOf(total_amount)).
+                setTicketId(Integer.valueOf(ticketId)).
+                setState("未支付").
+                setId(id);
+        insert(order);
+    }
 }

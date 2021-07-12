@@ -25,7 +25,8 @@ public class FlightUtil {
 //
     public boolean transferCrawlerToFlight(){
         crawlerMapper.listAll().forEach((crawler -> {
-            Flight flight = new Flight(0, crawler.getAirline(), crawler.getFlightNumber(), crawler.getDepartureDate(), crawler.getArrivalDate(), crawler.getDcity(), crawler.getAcity(), crawler.getDate().toString(),null);
+            crawler.getDate().setHours(0);
+            Flight flight = new Flight(0, crawler.getAirline(), crawler.getFlightNumber(), crawler.getDepartureDate(), crawler.getArrivalDate(), crawler.getDcity(), crawler.getAcity(), crawler.getDate().toString(),null,false);
             if(flightMapper.getFlightByAllCondition(flight)==null){
                 flightMapper.insert(flight);
             }

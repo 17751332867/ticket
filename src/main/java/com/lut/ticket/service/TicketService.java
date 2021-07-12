@@ -19,7 +19,8 @@ public class TicketService {
      * @return ??????????List
      */
     public List<Ticket> listAll() {
-    return ticketMapper.listAll();
+        List<Ticket> tickets = ticketMapper.listAll();
+        return tickets;
     }
 
 

@@ -1,6 +1,8 @@
 package com.lut.ticket.controller;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -45,7 +47,7 @@ public class UserController {
      * @return ??????
      */
     @RequestMapping("insert")
-    public int insert(@RequestBody User user) {
+    public int insert(User user) {
         return userService.insert(user);
     }
     
@@ -92,5 +94,14 @@ public class UserController {
     public int delete(@RequestBody User user) {
         return userService.delete(user);
     }
-    
+
+    @RequestMapping("login")
+    public String login(@Param("phone")String phone,@Param("password")String password){
+        return userService.login(phone,password);
+    }
+
+    @RequestMapping("getUserByPhone")
+    public User getUserByPhone(String phone){
+        return userService.getUserByPhone(phone);
+    }
 }

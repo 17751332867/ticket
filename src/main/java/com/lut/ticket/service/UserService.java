@@ -40,7 +40,11 @@ public class UserService {
      * @return ??????
      */
     public int insert(User user) {
-    return userMapper.insert(user);
+        user.setState("未在线");
+        if(userMapper.getByPhone(user.getPhone())!=null){
+            return 0;
+        }
+        return userMapper.insert(user);
     }
 
     /**
@@ -83,4 +87,18 @@ public class UserService {
     return userMapper.delete(user);
     }
 
+    public String login(String phone, String password) {
+        User user = userMapper.getByPhone(phone);
+        if(user==null){
+            return "无此用户";
+        }
+        if(!user.getPassword().equals(password)){
+            return "密码错误";
+        }
+        return "登录成功";
+    }
+
+    public User getUserByPhone(String phone) {
+        return userMapper.getByPhone(phone);
+    }
 }

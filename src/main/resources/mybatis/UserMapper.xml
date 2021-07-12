@@ -21,7 +21,10 @@
         , t.state
         , t.address
         </sql> 
-    
+
+    <select id="getByPhone" resultMap="BaseResultMap">
+        select * from user where phone = #{phone}
+    </select>
     <!-- ???? -->
     <select id="listAll" resultMap="BaseResultMap">
 SELECT         

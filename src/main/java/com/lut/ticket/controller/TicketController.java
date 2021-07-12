@@ -1,6 +1,8 @@
 package com.lut.ticket.controller;
 
 import java.util.List;
+
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +23,16 @@ public class TicketController {
      *
      * @return ??????????List
      */
+
+    @SneakyThrows
+    @RequestMapping("crawler")
+    public String crawler(){
+        String python_path=System.getProperty("user.dir")+"\\crawler\\crawler.py";
+        String cmd = "python \""+python_path+"\" "+"北京 南京 2021 7 10";
+        System.out.println(cmd);
+        Runtime.getRuntime().exec(cmd);
+        return "success";
+    }
     @RequestMapping("list")
     public List<Ticket> listAll() {
         return ticketService.listAll();

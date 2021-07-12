@@ -24,6 +24,9 @@ List<User> listAll();
      */
 User getById(Integer id);
 
+
+
+User getByPhone(String Phone);
 /**
      * ?????????
      *

@@ -95,7 +95,6 @@ public class FlightService {
     public List<Flight> getFlightByJudge(Flight flight){
         List<Flight> flights = flightMapper.getFlightByJudge(flight);
         if(flights.size()==0||flights==null){
-            flightMapper.insert(new Flight());
             crawlerMapper.deleteAll();
             String python_path=System.getProperty("user.dir")+"\\crawler\\crawler.py";
             String cmd = "python \""+python_path+"\" "+flight.getDicty()+" "+flight.getAcity()+" "+(flight.getDate().split("-")[0])+" "+(flight.getDate().split("-")[1])+" "+flight.getDate().split("-")[2];

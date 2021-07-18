@@ -6,15 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lut.ticket.entity.Order;
-import com.lut.ticket.service.OrderService;
+import com.lut.ticket.entity.Passenger;
+import com.lut.ticket.service.PassengerService;
 
 @RestController
-@RequestMapping("Order")
-public class OrderController {
+@RequestMapping("Passenger")
+public class PassengerController {
 
     @Autowired
-    private OrderService orderService;
+    private PassengerService passengerService;
 
     /**
      * ??????
@@ -22,8 +22,8 @@ public class OrderController {
      * @return ??????????List
      */
     @RequestMapping("list")
-    public List<Order> listAll() {
-        return orderService.listAll();
+    public List<Passenger> listAll() {
+        return passengerService.listAll();
     }
 
 
@@ -34,63 +34,63 @@ public class OrderController {
      * @return ?????????null
      */
     @RequestMapping("getById")
-    public Order getById(Integer id) {
-        return orderService.getById(id);
+    public Passenger getById(Integer id) {
+        return passengerService.getById(id);
     }
     
     /**
      * ?????????
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
     @RequestMapping("insert")
-    public int insert(@RequestBody Order order) {
-        return orderService.insert(order);
+    public int insert(Passenger passenger) {
+        return passengerService.insert(passenger);
     }
     
     /**
      * ?????null??
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
     @RequestMapping("insertIgnoreNull")
-    public int insertIgnoreNull(@RequestBody Order order) {
-        return orderService.insertIgnoreNull(order);
+    public int insertIgnoreNull(@RequestBody Passenger passenger) {
+        return passengerService.insertIgnoreNull(passenger);
     }
     
     /**
      * ?????????
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
     @RequestMapping("update")
-    public int update(@RequestBody Order order) {
-        return orderService.update(order);
+    public int update(@RequestBody Passenger passenger) {
+        return passengerService.update(passenger);
     }
     
     /**
      * ?????null??
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
     @RequestMapping("updateIgnoreNull")
-    public int updateIgnoreNull(@RequestBody Order order) {
-        return orderService.updateIgnoreNull(order);
+    public int updateIgnoreNull(@RequestBody Passenger passenger) {
+        return passengerService.updateIgnoreNull(passenger);
     }
     
     /**
      * ????
      *
-     * @param order ??????
+     * @param passenger ??????
      * @return ??????
      */
     @RequestMapping("delete")
-    public int delete(@RequestBody Order order) {
-        return orderService.delete(order);
+    public int delete(@RequestBody Passenger passenger) {
+        return passengerService.delete(passenger);
     }
     
 }

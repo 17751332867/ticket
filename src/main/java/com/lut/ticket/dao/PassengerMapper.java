@@ -2,66 +2,66 @@ package com.lut.ticket.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import com.lut.ticket.entity.Order;
+import com.lut.ticket.entity.Passenger;
 import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
-public interface OrderMapper {
+public interface PassengerMapper {
 
-/**
+    /**
      * ??????
      *
      * @return ??????????List
      */
-List<Order> listAll();
+    List<Passenger> listAll();
 
 
-/**
+    /**
      * ??????
      *
      * @param id ??
      * @return ?????????null
      */
-Order getById(Integer id);
+    Passenger getById(Integer id);
 
-/**
+    /**
      * ?????????
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
-int insert(Order order);
+    int insert(Passenger passenger);
 
-/**
+    /**
      * ?????null??
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
-int insertIgnoreNull(Order order);
+    int insertIgnoreNull(Passenger passenger);
 
-/**
+    /**
      * ?????????
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
-int update(Order order);
+    int update(Passenger passenger);
 
-/**
+    /**
      * ?????null??
      *
-     * @param order ?????
+     * @param passenger ?????
      * @return ??????
      */
-int updateIgnoreNull(Order order);
+    int updateIgnoreNull(Passenger passenger);
 
-/**
+    /**
      * ????
      *
-     * @param order ??????
+     * @param passenger ??????
      * @return ??????
      */
-int delete(Order order);
+    int delete(Passenger passenger);
 
 }

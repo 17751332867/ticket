@@ -1,6 +1,7 @@
 package com.lut.ticket;
 
 import com.lut.ticket.dao.CrawlerMapper;
+import com.lut.ticket.dao.FlightChartMapper;
 import com.lut.ticket.dao.FlightMapper;
 import com.lut.ticket.dao.UserMapper;
 import com.lut.ticket.entity.Crawler;
@@ -32,23 +33,12 @@ class TicketApplicationTests {
     private MailUtil mailUtil;
     @Autowired
     private CrawlerMapper crawlerMapper;
+    @Autowired
+    private FlightChartMapper flightChartMapper;
     @SneakyThrows
     @Test
     void contextLoads() throws IOException {
-        //crawlerMapper.deleteAll();
-        String python_path=System.getProperty("user.dir")+"\\crawler\\crawler.py";
-        String cmd = "python \""+python_path+"\" "+"北京 南京 2021 7 10";
-        System.out.println(cmd);
-        Process process = Runtime.getRuntime().exec(cmd);
-        InputStream is = process.getInputStream();
-        Scanner scanner = new Scanner(is);
-        while (scanner.hasNext()){
-            System.out.println(scanner.nextLine());
-        }
-        int re = process.waitFor();
-        scanner.close();
-        is.close();
-        //flightUtil.transferCrawlerToFlight();
+        System.out.println(flightChartMapper.getAllData());
     }
 
 }

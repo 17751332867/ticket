@@ -89,7 +89,7 @@ public class FlightController {
      * @return ??????
      */
     @RequestMapping("delete")
-    public int delete(@RequestBody Flight flight) {
+    public int delete(Flight flight) {
         return flightService.delete(flight);
     }
 

@@ -208,8 +208,7 @@ INSERT INTO flight
 
 <!-- ???????? -->
 <delete id="delete" parameterType="com.lut.ticket.entity.Flight">
-UPDATE flight
-SET is_deleted=1
+DELETE from flight
 WHERE id = #{id}
 </delete>
 

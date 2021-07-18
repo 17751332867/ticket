@@ -69,7 +69,7 @@ public class UserController {
      * @return ??????
      */
     @RequestMapping("update")
-    public int update(@RequestBody User user) {
+    public int update(User user) {
         return userService.update(user);
     }
     
@@ -91,7 +91,7 @@ public class UserController {
      * @return ??????
      */
     @RequestMapping("delete")
-    public int delete(@RequestBody User user) {
+    public int delete(User user) {
         return userService.delete(user);
     }
 

@@ -79,7 +79,7 @@ public class TicketController {
      * @return ??????
      */
     @RequestMapping("update")
-    public int update(@RequestBody Ticket ticket) {
+    public int update(Ticket ticket) {
         return ticketService.update(ticket);
     }
     
@@ -101,7 +101,7 @@ public class TicketController {
      * @return ??????
      */
     @RequestMapping("delete")
-    public int delete(@RequestBody Ticket ticket) {
+    public int delete(Ticket ticket) {
         return ticketService.delete(ticket);
     }
     
